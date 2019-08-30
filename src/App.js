@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-
-// Normalizes string as a slug - a string that is safe to use
-// in both URLs and html attributes
-import slugify from 'slugify';
-
 import './App.css';
-
-// This object will allow us to
-// easily convert numbers into US dollar values
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
+import Header from './Header/Header';
+import PriceList from './PriceList/PriceList';
+import SpecList from './SpecList/SpecList';
 
 class App extends Component {
   state = {
@@ -34,7 +25,7 @@ class App extends Component {
       }
     }
   };
-
+ 
   updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
@@ -43,30 +34,17 @@ class App extends Component {
     });
   };
 
+  render() {
     return (
       <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
-        <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {features}
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
-          </section>
-        </main>
+        <Header />
+        <PriceList 
+          updateFeature={this.props.updateFeature}
+        />
+        <SpecList />
       </div>
-    );
+    )
   }
-}
+};
 
 export default App;

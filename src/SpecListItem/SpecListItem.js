@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-class Summary extends Component {
+class SpecListItem extends Component {
   render() {
+      const featureHash = feature + '-' + idx;
+      const selectedOption = this.state.selected[feature];
     return (
       <div className="summary__option" key={featureHash}>
         <div className="summary__option__label">{feature} </div>
@@ -12,11 +14,12 @@ class Summary extends Component {
         </div>
       </div>
     );
-    });
+  }
+};
 
-const total = Object.keys(this.state.selected).reduce(
-(acc, curr) => acc + this.state.selected[curr].cost,
-0
-);
+export default SpecListItem;
 
-export default Summary;
+
+
+
+

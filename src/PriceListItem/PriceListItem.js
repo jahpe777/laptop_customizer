@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import '../App.css';
+import slugify from 'slugify';
 
-class FeatureOption extends Component {
+class PriceListItem extends Component {
   render() {
-    const features = Object.keys(this.props.features).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const options = this.props.features[feature].map(item => {
-        const itemHash = slugify(JSON.stringify(item));
+  const USCurrencyFormat = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+
+    const itemHash = slugify(JSON.stringify(item));
+
         return (
           <div key={itemHash} className="feature__item">
             <input
@@ -22,6 +26,7 @@ class FeatureOption extends Component {
             </label>
           </div>
         );
-      });
+      }
+    };
     
-export default FeatureOption;
+export default PriceListItem;
