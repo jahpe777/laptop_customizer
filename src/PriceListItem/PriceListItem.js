@@ -25,7 +25,7 @@ class PriceListItem extends Component {
               {item.name} ({USCurrencyFormat.format(item.cost)})
             </label>
           </div>
-        );
+        )
       }
     };
     

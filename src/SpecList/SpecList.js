@@ -27,8 +27,9 @@ class SpecList extends Component {
           </div>
         </div>
       </section>
-    );
-    });
+      )}
+    )}
+  };
 
 export default SpecList;
 
