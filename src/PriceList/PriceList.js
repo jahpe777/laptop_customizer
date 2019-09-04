@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
-import '../App.css';
+import PriceListItem from '../PriceListItem/PriceListItem';
 
 class PriceList extends Component {
   render() {
-    const features = Object.keys(this.props.features).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const options = this.props.features[feature].map(item => {
-      const itemHash = slugify(JSON.stringify(item)); 
     return (
-    <div>
-      <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {features}
-      </form>
-      <fieldset className="feature" key={featureHash}>
-        <legend className="feature__name">
-          <h3>{feature}</h3>
-        </legend>
-        {options}
-      </fieldset>
-    </div> 
-      )}
-    )}
-  )}
-};
+      <section className='main__form'>
+        <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
+        {
+          Object.keys(this.props.features)
+            .map(key => {
+              const options = this.props.features[key].map((item, index) => {
+                const selectedClass = item.name === this.props.currentSelections[key].name ? 'feature__selected' : ''; 
+                const featureClass = 'feature__option ' + selectedClass;
+                return <PriceListItem 
+                        key={index}
+                        keyName={key}
+                        item={item}
+                        featureClass={featureClass}
+                        handleUpdate={this.props.handleUpdate}
+                        />
+              });
+              return <div className='feature' key={key}>
+                      <div className='feature__name'>{key}</div>
+                      <ul className='feature__list'>
+                        {options}
+                      </ul>
+                      </div>
+            })
+          }
+      </section> 
+    )
+   }
+  };
 
 export default PriceList;

@@ -1,35 +1,26 @@
 import React, { Component } from 'react';
-import '../App.css';
+import SpecListItem from '../SpecListItem/SpecListItem'
 
 class SpecList extends Component {
   render() {
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const selectedOption = this.state.selected[feature];
-
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-      );
-    const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    });
-
-    return (
-      <section className="main__summary">
-        <h2>Your cart</h2>
-        {summary}
-        <div className="summary__total">
-          <div className="summary__total__label">Total</div>
-          <div className="summary__total__value">
-            {USCurrencyFormat.format(total)}
+    return(
+      <div>
+        <section className='main__summary'>
+          <h3>NEW GREENLEAF 2018</h3>
+          <SpecListItem currentSelections={this.props.currentSelections}/>
+          <div className='summary__total'>
+          <div className='summary__total__label'>Your Price: </div>
+            <div className='summary__total__value'>
+              {new Intl.NumberFormat('en-US', {style:'currency', currency: 'USD'})
+                .format(Object.keys(this.props.currentSelections)
+                .reduce((acc, curr) => acc + this.props.currentSelections[curr].cost, 0))}
+            </div>
           </div>
-        </div>
-      </section>
-      )}
-    )}
-  };
+        </section>
+      </div>
+    )
+  }
+}
 
 export default SpecList;
 

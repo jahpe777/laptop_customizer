@@ -5,8 +5,10 @@ import PriceList from './PriceList/PriceList';
 import SpecList from './SpecList/SpecList';
 
 class App extends Component {
-  state = {
-    selected: {
+  constructor(props) {
+    super(props);
+    this.state = {
+    'selected': {
       Processor: {
         name: '17th Generation Intel Core HB (7 Core with donut spare)',
         cost: 700
@@ -19,12 +21,13 @@ class App extends Component {
         name: 'Toyota Corolla 1.5v',
         cost: 1150.98
       },
-      Display: {
+      'Display': {
         name: '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
         cost: 1500
       }
     }
-  };
+  }
+};
  
   updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
@@ -36,13 +39,17 @@ class App extends Component {
 
   render() {
     return (
+    <main>
       <div className="App">
-        <Header />
-        <PriceList 
-          updateFeature={this.props.updateFeature}
-        />
-        <SpecList />
-      </div>
+          <Header />
+          <PriceList 
+            features={this.props.features}
+            handleUpdate={(feature,newValue)=>this.updateFeature(feature, newValue)}
+            currentSelections={this.state.selected}
+          />
+          <SpecList currentSelections={this.state.selected} />
+        </div>
+    </main>
     )
   }
 };
